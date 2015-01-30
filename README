@@ -1,0 +1,67 @@
+******   Caliper Release 0.1    ******
+
+The test suite mainly includes  performance test
+cases, it can be used to test the performance of machine. The test suite supports linux of x86_64, arm_32, arm_64. Here is steps to setup testbed
+
+1. Host OS installation
+    It supports x86_64 CentOS6 and Ubuntu platform, you need install 64bit
+    CentOS system or Ubuntu system on your PC or server platform.
+
+2. Toolchain installation
+    To build arm/android target binary, it requires arm/android toolchain
+    deployment, for arm system we use compiler with hard-float ABI. And for
+    android toolchain we use android ndk tools.
+
+    Here is website to download ARM toolchains:
+        https://releases.linaro.org/13.10/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux.tar.bz2
+    Website link to download android ndk toolchains:
+        http://dl.google.com/android/ndk/android-ndk64-r10-linux-x86_64.tar.bz2
+    Note: Current test suite can only build for android armv7 platform,
+    building for armv8 platform is not supported now.
+3. Test case compiling
+    Supposing these two directories is for arm/android installation separately:
+        /opt/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux
+        /opt/android-ndk-r9d
+    Executing the following script before compiling test suite
+        # export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.8-2013.10_linux/bin
+        # export ANDROID_NDK_PATH=/opt/android-ndk-r9d
+    Executing this script to compile test cases:
+        # python install.py x86_64             (building the testsuit for x86_64 platform)
+        # python install arm_32             (building the testsuite for armv7 platform)
+        # python install arm_64             (building the testsuite for arm64 platform)
+    After finished building command, the test cases binary images are saved in
+    the following directory:
+        # build/x86_64
+        # build/arm_32
+        # build/arm_64
+
+4. Test case deployment
+    Currently the test suite does not support automatically deployment and
+    execution, users need copy the test suite to target machine and execute
+    the test suite by manual; or cross-compile on the host, and copy execute
+    files to the target.
+
+4.1 Executing on ARM system
+    On arm server platform such as D01 platform, it requires that x86_64 host
+    machine is connected with target board with Ethernet cable.
+        1. Copy the test suite located on build/arm to target machine,  *******
+           supposing copying to /root/test/ directory
+        2. Login arm target board by ssh command
+        3. Execute the test cases located at directory /root/test
+            # su -
+            # cd /root/test
+            # ./run.sh
+            # ./parser.sh
+        4. The test result is saved in the directory of output which locates in
+        the build directory.
+
+4.2 Executing on host machine
+    Executing the testsuite on x86_64 server platform is simple, just executing
+    such commands:
+        # cd build/x86
+        # su
+        # ./run.sh
+        # ./parser.sh
+    The test result is saved in the directory of output which locates in the build
+    directory.
+

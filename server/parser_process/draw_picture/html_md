@@ -1,0 +1,23 @@
+#!/bin/bash
+HTML="output/html/"
+
+rm -fr ${HTML}head   ${HTML}days   ${HTML}configuration  ${HTML}Caliper_result.md
+
+echo "#Caliper Results#"  >> ${HTML}head
+echo "  " >> ${HTML}head
+
+echo "Wu Yanjun (00291783) wu.wu@hisilicon.com  "  $(date +%F) >> ${HTML}days
+echo "   "   >> ${HTML}days
+
+
+echo "##"$(uname -n) "Configuration##"  >> ${HTML}configuration
+echo "   " >> ${HTML}configuration
+eval "./get_hardware_info    >> ${HTML}configuration"
+echo "    " >> ${HTML}configuration
+
+eval "cat ${HTML}head ${HTML}days ${HTML}configuration ${HTML}Caliper_result  >> ${HTML}Caliper_result.md"
+
+
+rm -fr ${HTML}head   ${HTML}days   ${HTML}configuration 
+rm -fr ${HTML}Caliper_result.html
+eval "markdown_py -o html4 ${HTML}Caliper_result.md > ${HTML}Caliper_result.html"

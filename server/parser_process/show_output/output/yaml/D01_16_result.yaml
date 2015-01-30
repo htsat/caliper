@@ -1,0 +1,45 @@
+Configuration:
+  CPU: null
+  Memory: null
+  OS_Version: null
+name: D01_16cores
+results:
+  Performance:
+    latency:
+      Total_Scores: 3.045542671755358
+      process:
+        Point_Scores:
+          lat_sys_null: 5.649627348746107
+          lat_sys_read: 5.068898374371098
+          lat_sys_write: 3.9875781043357343
+          lat_sys_stat: 2.0314883270025748
+          lat_sys_fstat: 4.001600960640448
+          lat_sys_open/close: 1.2073192233284613
+          lat_sig_install: 3.423934786989504
+          lat_sig_catch: 1.5414744626715526
+          #lat_sig_prot:
+          lat_proc_fork: 3.501006776107652
+          lat_proc_exec: 3.3149677206589794
+          lat_proc_shell: 0.0
+        Total_Scores: 3.045542671755358
+    memory:
+      Total_Scores: 16.56284747538565
+      bandwidth:
+        Total_Scores: 16.56284747538565
+        Point_Scores:
+          bw_mem_rd: 24.6145
+          bw_mem_wr: 19.2179
+          bw_mem_rdwr: 15.8665
+          bw_mem_bzero: 18.375899999999998
+          bw_mem_bcopy: 9.0375
+    network:
+      Total_Scores: 2.95394849697122
+      latency:
+        Total_Scores:  2.95394849697122
+        Point_Scores:
+          lat_pipe: 2.229229160944078
+          lat_unix: 1.9447672485768788
+          lat_udp: 5.115983076237286
+          lat_tcp: 4.2372615082435345
+          lat_connect: 2.393193862059127
+

@@ -1,0 +1,46 @@
+
+Configuration:
+  CPU: null
+  Memory: null
+  OS_Version: null
+
+name: Server
+results:
+  Performance:
+    latency:  
+      Total_Scores: 4.098032171133918
+      process:
+        Total_Scores: 4.098032171133918
+        Point_Scores:
+          lat_sys_null: 4.919487298072376
+          lat_sys_read: 4.541234284482819
+          lat_sys_write: 4.458779620677098
+          lat_sys_stat: 4.11449476951871
+          lat_sys_fstat: 4.541702621954747
+          lat_sys_open/close: 2.3396694187070386
+          lat_sig_install: 4.6388856137508965
+          lat_sig_catch: 2.9471737997130876
+          lat_proc_fork: 4.865865502016251
+          lat_proc_exec: 4.610769934301078
+          lat_proc_shell: 0.0
+    memory:
+      Total_Scores: 175.52052168305977
+      bandwidth:
+        Total_Scores: 175.52052168305977
+        Point_Scores:
+          bw_mem_rd: 343.4282
+          bw_mem_wr: 247.02290000000002
+          bw_mem_rdwr: 224.6146
+          bw_mem_bzero: 247.2371
+          bw_mem_bcopy: 35.3602
+    network:
+      Total_Scores: 5.423923651890135
+      latency:
+        Total_Scores: 5.423923651890135
+        Point_Scores:
+          lat_pipe: 2.9342045954286653
+          lat_unix:  3.0205829067135963
+          lat_udp: 7.614465814304939
+          lat_tcp: 7.102817337226401
+          lat_connect: 7.005608483181637
+

@@ -1,0 +1,47 @@
+
+Configuration:
+  CPU: null
+  Memory: null
+  OS_Version: null
+
+name: TV_S5V200
+results:
+  Performance:
+    latency: 
+      Total_Scores: 3.407839606180166
+      process:
+        Total_Scores:  3.407839606180166
+        Point_Scores:
+          lat_sys_null: 5.770618103811176
+          lat_sys_read: 4.102359124586128
+          lat_sys_write: 3.9220210204417514
+          lat_sys_stat: 2.2156669801466387
+          lat_sys_fstat: 4.158732212425585
+          lat_sys_open/close: 1.3921016266827684
+          lat_sig_install: 3.8272342859022346
+          lat_sig_catch: 1.5771222828478513
+          #lat_sig_prot:
+          lat_proc_fork: 5.49079775590318
+          lat_proc_exec: 5.357997454131719
+          lat_proc_shell: 0.0
+    memory:
+      Total_Scores: 15.21984586356882
+      bandwidth:
+        Total_Scores: 15.21984586356882
+        Point_Scores:
+          bw_mem_rd: 13.2312
+          bw_mem_wr: 13.3343
+          bw_mem_rdwr: 13.3258
+          bw_mem_bzero: 27.4048
+          bw_mem_bcopy: 12.7254
+    network:
+      Total_Scores: 2.3782944338561984
+      latency:
+        Total_Scores: 2.3782944338561984
+        Point_Scores:
+          lat_pipe: 2.4594237423827012
+          lat_unix: 2.3039395336239306
+          lat_udp: 0.0
+          lat_tcp: 0.0
+          lat_connect: 0.0
+

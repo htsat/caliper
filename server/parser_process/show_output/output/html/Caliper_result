@@ -1,0 +1,15 @@
+
+##Test Result##
+
+###The total scores of Test Items###
+![total scores](./Total_Scores.png)
+
+###The scores of SubItems###
+####Comprision of Latency####
+![latency_process scores](./latency_process.png)
+
+####Comparision of Network
+![network_latency scores](./network_latency.png)
+
+####Comparision of Memory
+![memory_bandwidth scores](./memory_bandwidth.png)

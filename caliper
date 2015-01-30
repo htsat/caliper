@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+#
+#   Author  :   wuyanjun 00291783
+#   E-mail  :   wu.wu@hisilicon.com
+#   Date    :   15/01/13 13:53:59
+#   Desc    :  
+#
+import os
+import logging
+import pdb
+
+try:
+    import caliper.common as common
+except ImportError:
+    import common
+   
+from caliper.server.build import build
+from caliper.server.run import run
+from caliper.server.parser_process import parser
+from caliper.server.parser_process.draw_picture import show_picture
+from caliper.client.shared.settings import settings
+from caliper.client.shared import error
+from caliper.server.hosts import host_factory
+
+logging.basicConfig(level=logging.INFO)
+
+CALIPER_DIR = os.getcwd()
+GEN_DIR = os.path.join(CALIPER_DIR, "gen")
+TEST_CFG_DIR = os.path.join(CALIPER_DIR, "test_cases_cfg")
+
+def build_all_tests(remote_host):
+    try:
+        logging.info("Begining to build Caliper for local host")
+        #build.build_for_local()
+    except Exception, e:
+        print e
+
+    try:
+        logging.info("Begining to build Caliper for the remote host")
+        build.build_for_target(remote_host)
+    except Exception, e:
+        logging.info(e)
+   
+def run_caliper(remote_host):
+    try:
+        logging.info("begining to run Caliper")
+        run.run_all_tests(CALIPER_DIR, GEN_DIR, remote_host)
+    except Exception, e:
+        print e
+        logging.info("There is wroing when runnnig Caliper")
+
+def parser_caliper(remote_host):
+    try:
+        logging.info("begining to parser the result of caliper")
+        parser.parser_caliper(remote_host)
+    except Exception, e:
+        logging.info("There is wrong when parsering the caliper result")
+        print e
+
+if __name__=="__main__":
+    try:
+        client_ip = settings.get_value('CLIENT', 'ip', type=str)
+        port = settings.get_value('CLIENT', 'port', type=int)
+        user = settings.get_value('CLIENT', 'user', type=str)
+        password = settings.get_value('CLIENT', 'password', type=str)
+    except Exception, e:
+        raise error.ServRunError(e.args[0], e.args[1])
+
+    remote_host = host_factory.create_host(client_ip, user, password, port)
+    build_all_tests(remote_host)
+   
+    #run_caliper(remote_host)  
+
+    #parser_caliper(remote_host)
+    try:
+        show_picture.show_caliper_result()
+    except Exception, e:
+        raise e
+
+
