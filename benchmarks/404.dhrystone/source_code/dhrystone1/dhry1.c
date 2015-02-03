@@ -98,7 +98,7 @@ main(int argc, char *argv[])
     if (nopause)
     {
        printf(" Press Enter\n\n");
-       int g = getchar();
+       //int g = getchar();
     }
     exit(0);
 }

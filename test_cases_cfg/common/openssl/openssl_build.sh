@@ -38,7 +38,7 @@ echo $OBJPATH
             if [ $ARCH = "arm_32" ] ; then
                 CC=$GCC ./Configure linux-armv4
             else
-                CC=$GCC ./Configure linux-arm64
+                CC=$GCC ./Configure linux-aarch64
             fi
             make
             cp apps/openssl ../$myOBJPATH/

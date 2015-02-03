@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
       {
        printf ("Cannot open results file \n\n");
        printf("Press Enter to exit\n");
-       i = getchar();
+       //i = getchar();
  
        exit (0);
       }
@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
  if (nopause)
  {
     printf(" Press Enter\n\n");
-    i = getchar();
+    //i = getchar();
  }  
  return 0;             
 }

@@ -32,7 +32,7 @@ TEST_CFG_DIR = os.path.join(CALIPER_DIR, "test_cases_cfg")
 def build_all_tests(remote_host):
     try:
         logging.info("Begining to build Caliper for local host")
-        #build.build_for_local()
+        build.build_for_local()
     except Exception, e:
         print e
 
@@ -70,9 +70,9 @@ if __name__=="__main__":
     remote_host = host_factory.create_host(client_ip, user, password, port)
     build_all_tests(remote_host)
    
-    #run_caliper(remote_host)  
+    run_caliper(remote_host)  
 
-    #parser_caliper(remote_host)
+    parser_caliper(remote_host)
     try:
         show_picture.show_caliper_result()
     except Exception, e:

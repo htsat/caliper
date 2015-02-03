@@ -102,8 +102,12 @@
 
      struct sysinfo sysdata;
      struct utsname udetails; 
- 
+
+#if 0
       _cpuida();
+#else
+     strcpy(idString1, "Cortex A8");
+#endif
      sprintf(configdata[1], "  Assembler CPUID and RDTSC      ");  
      sprintf(configdata[2], "  CPU %s, Features Code %8.8X, Model Code %8.8X",
                            idString1, edxCode1, eaxCode1);
@@ -112,12 +116,17 @@
      max = 0;
      for (i=0; i<10; i++)
      {
+#if 0
+
         startCount = 0;
         endCount   = 0;
         start_time();
         _calculateMHz();
         end_time();      
         megaHz = (int)((double)cycleCount / 1000000.0 / secs + 0.5);
+#else
+        megaHz = 1000;
+#endif
         if (megaHz > max) max = megaHz;
         if (megaHz < min) min = megaHz;
      }

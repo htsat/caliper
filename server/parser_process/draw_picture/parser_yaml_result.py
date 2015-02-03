@@ -2,6 +2,7 @@
 ## wu.wu@hisilicon.com
 ## Copyright @
 
+import os
 import yaml
 import matplotlib
 matplotlib.use("Agg")

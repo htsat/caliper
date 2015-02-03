@@ -130,7 +130,7 @@ int             Int_Glob;
      {
         printf(" Can not open Dhry.txt\n\n");
         printf(" Press Enter\n\n");
-        int g = getchar();
+        //int g = getchar();
         exit(1);
      }
 
@@ -206,7 +206,8 @@ int             Int_Glob;
                                                  Number_Of_Runs);
  */
 
-   Number_Of_Runs = 5000;
+   //Number_Of_Runs = 5000;
+   Number_Of_Runs = 20000;
 
    do
    {
@@ -576,7 +577,7 @@ int             Int_Glob;
     if (nopause)
     {
        printf(" Press Enter\n\n");
-       int g = getchar();
+       //int g = getchar();
     }
  }
  

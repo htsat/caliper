@@ -10,6 +10,9 @@
 import sys
 import os
 import re
+import subprocess
+import socket
+
 from caliper.client.shared.utils import *
 from caliper.client.shared import error
 
@@ -26,7 +29,7 @@ def get_host_arch(host):
                 return 'x86_64'
             elif re.search('i[36]86', output):
                 return 'x86_32'
-            elif re.search('arm_64', output):
+            elif re.search('aarch64', output):
                 return 'arm_64'
             else:
                 if re.search('arm_32', output) or re.search('armv7', output):
@@ -87,14 +90,41 @@ def get_local_machine_arch():
                 return 'x86_64'
             elif re.search('i[36]86', output):
                 return 'x86_32'
-            elif re.search('arm_64', output):
+            elif re.search('aarch64', output):
                 return 'arm_64'
             else:
-                if re.search('arm_32', output):
+                if re.search('arm_32', output) or re.search('armv7', output):
                     return 'arm_32'
         else:
             msg = "Caliper does not support this kind of arch machine"
             raise error.ServUnsupportedArchError(msg)
+
+def get_target_ip(target):
+    try:
+        ip_result = target.run("ifconfig")
+    except error.CmdError, e:
+        raise error.ServRunError(e.args[0], e.args[1])
+    else:
+        returncode = ip_result.exit_status
+        if returncode==0:
+            ip = re.search('\d+\.\d+\.\d+\.\d+', ip_result.stdout).group(0)
+            if ip:
+                return ip
+        return None
+
+def get_local_ip(ifname):
+    try:
+        import socket, fcntl, struct
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        inet = fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', ifname[:15]))   
+        ret = socket.inet_ntoa(inet[20:24])
+        return ret
+    except Exception, e:
+        import socket
+        hostname = socket.getfqdn()
+        local_ip = socket.gethostbyname(hostname)
+        return local_ip
+    return "127.0.1.1"
 
 def sh_escape(command):
     """

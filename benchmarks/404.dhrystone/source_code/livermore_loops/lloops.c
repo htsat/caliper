@@ -380,7 +380,7 @@ main(int argc, char *argv[])
     {
         printf (" Cannot open results file LLloops.txt\n\n");
         printf(" Press Enter\n\n");
-        gg = getchar();
+        //gg = getchar();
         exit (0);
     }
 
@@ -733,7 +733,7 @@ main(int argc, char *argv[])
     if (nopause)
     {
         printf(" Press Enter\n\n");
-        gg = getchar();
+        //gg = getchar();
     }
     return 0;
 }

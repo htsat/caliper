@@ -123,7 +123,7 @@ main (int argc, char *argv[])
         {
             printf (" Cannot open results file \n\n");
             printf(" Press Enter\n\n");
-            int g = getchar();
+            //int g = getchar();
             exit (0);
         }
         fprintf (outfile, " ########################################################\n\n");                     
@@ -499,7 +499,7 @@ main (int argc, char *argv[])
     if (nopause)
     {
        printf(" Press Enter\n\n");
-       int gg = getchar();
+       //int gg = getchar();
     }
 }
      

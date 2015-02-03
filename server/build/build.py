@@ -175,6 +175,7 @@ def build_caliper(target_arch):
     else:
         arch = 'x86_64'
     # get the files list of 'cfg'
+    pdb.set_trace()
     cases_file = []
     cases_file = get_cases_def_files( arch )
     logging.info("config files are %s" %  cases_file)
@@ -208,11 +209,15 @@ def build_caliper(target_arch):
             os.remove(des_build_file)
 
 def build_for_target(target):
+    if server_utils.get_target_ip(target) == server_utils.get_local_ip("eth0"):
+        return 
+
     target_arch = server_utils.get_host_arch(target)
     try:
         build_caliper(target_arch)
     except Exception,e:
         raise
+
     try:
         result = target.run("test -d caliper", ignore_status=True)
     except error.ServRunError, e:
