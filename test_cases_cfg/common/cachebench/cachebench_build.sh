@@ -14,7 +14,7 @@ build_cachebench() {
            mv cachebench    ../../$myOBJPATH/
         fi
         if [ $ARCH = "arm_64" ]; then
-          make CC=$GCC CFLAGS="-mabi=lp64"
+          make CC=$GCC #CFLAGS="-mabi=lp64"
            mv cachebench    ../../$myOBJPATH/
         fi
         if [ $ARCH = "android" ]; then

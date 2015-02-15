@@ -112,19 +112,25 @@ def get_target_ip(target):
                 return ip
         return None
 
-def get_local_ip(ifname):
-    try:
-        import socket, fcntl, struct
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        inet = fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', ifname[:15]))   
-        ret = socket.inet_ntoa(inet[20:24])
-        return ret
-    except Exception, e:
-        import socket
-        hostname = socket.getfqdn()
-        local_ip = socket.gethostbyname(hostname)
-        return local_ip
-    return "127.0.1.1"
+def get_local_ip():
+    #try:
+    #    import socket, fcntl, struct
+    #    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    #    inet = fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', ifname[:15]))   
+    #    ret = socket.inet_ntoa(inet[20:24])
+    #    return ret
+    #except Exception, e:
+    #    import socket
+    #    hostname = socket.getfqdn()
+    #    local_ip = socket.gethostbyname(hostname)
+    #    return local_ip
+    #return "127.0.1.1"
+    cmd_output = commands.getoutput('ifconfig')
+    obtain_ip = re.search('\d+\.\d+\.\d+\.\d+', cmd_output).group(0)
+    if obtain_ip:
+        return obtain_ip
+    else:
+        return "127.0.1.1"
 
 def sh_escape(command):
     """

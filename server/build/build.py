@@ -209,7 +209,7 @@ def build_caliper(target_arch):
             os.remove(des_build_file)
 
 def build_for_target(target):
-    if server_utils.get_target_ip(target) == server_utils.get_local_ip("eth0"):
+    if server_utils.get_target_ip(target) == server_utils.get_local_ip():
         return 
 
     target_arch = server_utils.get_host_arch(target)

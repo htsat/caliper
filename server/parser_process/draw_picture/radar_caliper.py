@@ -19,7 +19,6 @@ from matplotlib.path import Path
 from matplotlib.spines import Spine
 from matplotlib.projections.polar import PolarAxes
 from matplotlib.projections import register_projection
-import pdb
 
 def radar_factory(num_vars, frame='circle'):
     """
@@ -148,7 +147,7 @@ def deal_data(data_lists):
     max_of_columns = []
     # i means the columns
     for i in range(0, len(data_lists[0])):
-        tmp_max_column = data_lists[i][0]
+        tmp_max_column = data_lists[0][i]
         # j means the rows
         for j in range(0, len(data_lists)):
             if data_lists[j][i] > max_of_matrix:
@@ -167,14 +166,13 @@ def draw_radar(file_lists, store_folder):
     (spoke_labels, data_lists) = get_Items_score(file_lists)
     dimension = len(spoke_labels)
     theta = radar_factory(dimension, frame='circle')
-    labels = [file_list.split('_')[0] for file_list in file_lists]
+    labels = [file_list.split('/')[-1].split('_')[0] for file_list in file_lists]
 
     colors = ['b','r', 'g', 'm', 'y']
     if len(file_lists) < len(colors):
         colors = colors[0:len(file_lists)]
     title = 'Test Radar Diagram'
 
-    pdb.set_trace()
     fig = plt.figure(figsize=(9, 9))
     fig.subplots_adjust(wspace=0.25, hspace=0.20, top=0.85, bottom=0.05)
     ax = fig.add_subplot(1, 1, 1, projection='radar')

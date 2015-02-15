@@ -9,6 +9,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from pylab import *
 import numpy.numarray as na
+import pdb
+import radar_caliper as radar
 
 PLOT_COLOR = ['ro-', 'yo-', 'bo-', 'go-', 'do-']
 
@@ -170,6 +172,53 @@ class DrawPicture:
 
         plt.savefig( png_name, dit=512 )
 
+def draw_radar(file_lists, store_folder):
+    (spoke_labels, data_lists) = radar.get_Items_score(file_lists)
+    dimension = len(spoke_labels)
+    theta = radar.radar_factory(dimension, frame='circle')
+    labels = [file_list.split('\/')[-1].split('_')[0] for file_list in file_lists]
+
+    colors = ['b','r', 'g', 'm', 'y']
+    if len(file_lists) < len(colors):
+        colors = colors[0:len(file_lists)]
+    title = 'Test Radar Diagram'
+
+    fig = plt.figure(figsize=(9, 9))
+    fig.subplots_adjust(wspace=0.25, hspace=0.20, top=0.85, bottom=0.05)
+    ax = fig.add_subplot(1, 1, 1, projection='radar')
+    #for i in range(0, len(data_lists)):
+    # get the approriate scale for the picture
+    rgrid_list = get_rgrids(data_lists)
+
+    #plt.rgrids( rgrid_list )
+    ax.set_title(title, weight='bold', size='medium', position=(0.5, 1.1),
+                horizontalalignment='center', verticalalignment='center')
+    angles_list = [ th*180/np.pi for th in theta ]
+    angles = np.array(angles_list)
+    length = len(rgrid_list)
+    data = radar.deal_data(data_lists)
+   
+    for d, color in zip(data, colors):
+        ax.plot(theta, d, color=color)
+        ax.fill(theta, d, facecolor=color, alpha=0.25)
+  
+    # FIXME: why can this work?
+    #for angle, rgrid_data in zip(angles, rgrid_list):
+    #    ax.set_rgrids(range(1, 1+length), angle=angle, labels=rgrid_data)
+    ax.set_varlabels(spoke_labels)
+
+    # the usage of subplot is plt.subplot(x, y, m)   m<=x*y
+    plt.subplot(1, 1, 1)
+    legend = plt.legend(labels, loc=(0.9, 0.95), labelspacing=0.1)
+   
+    plt.setp(legend.get_texts(), fontsize='small')
+    plt.figtext(0.5, 0.965, 'Test of Drawing Radar Diagram for Caliper',
+                ha='center', color='black', weight='bold', size='large')
+
+    path_name = os.path.join(store_folder, "test.png")
+
+    plt.savefig(path_name, dit=512)
+
 def draw_picture(file_lists, picture_location):
     if len(file_lists) == 0:
         return
@@ -182,7 +231,19 @@ def draw_picture(file_lists, picture_location):
     test_results = results['results']['Performance']
     test_subItems = test_results.keys()
     DrawPicture.draw_testpoint_picture(file_lists, test_results, test_subItems, picture_location )
-    DrawPicture.draw_testSubItem_picture( file_lists,test_subItems, picture_location )
+    DrawPicture.draw_testSubItem_picture( file_lists, test_subItems, picture_location )
+    radar.draw_radar(file_lists, picture_location)
 
-if __name__=="__main__":
-    draw_picture('')
+
+if __name__ == "__main__":
+    file_lists = ['D01_16_result.yaml', 'D01_1_result.yaml', 'Server_result.yaml',
+                    'TV_result.yaml']
+    picture_location = "/home/wuyanjun/caliper/gen/output/html"
+    try:
+        radar.draw_radar(file_lists, picture_location)
+    except Exception, e:
+        raise e
+ 
+    #draw_picture('')
+
+

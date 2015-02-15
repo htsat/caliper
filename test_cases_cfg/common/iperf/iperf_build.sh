@@ -19,8 +19,8 @@ build_iperf() {
         if [ $ARCH = "arm_64" -o $ARCH = "arm_32" ]
         then
       pushd $BuildPATH
-                ac_cv_func_malloc_0_nonnull=yes $TOP_SRCDIR/configure #--host=$ARMCROSS
-           make
+                ac_cv_func_malloc_0_nonnull=yes $TOP_SRCDIR/configure --host=$ARMCROSS
+           make CC=$GCC
            cp src/iperf ../$myOBJPATH/
       popd
       rm -rf $BuildPATH

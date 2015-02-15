@@ -18,7 +18,7 @@ build_coremark() {
       make PORT_DIR=linux64 CC=$GCC compile clean
    fi
     if [ $ARCH = "arm_64"  ]; then
-        make PORT_DIR=linux64 CC=$GCC XCFLAGS=" -mabi=lp64 " compile
+        make PORT_DIR=linux64 CC=$GCC compile # XCFLAGS=" -mabi=lp64 " compile
         cp coremark.exe ../../$myOBJPATH/coremark
         make PORT_DIR=linux64 CC=$GCC clean
     fi

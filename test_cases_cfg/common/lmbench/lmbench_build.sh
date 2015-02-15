@@ -16,7 +16,7 @@ build_lmbench() {
         if [ $ARCH = "arm_32" ]; then
           make OS=lmbench  CC="$GCC -mfloat-abi=hard -mfpu=vfpv4 -mcpu=cortex-a15"
          else
-          make OS=lmbench  CC="$GCC -mabi=lp64"
+          make OS=lmbench  CC=$GCC # " -mabi=lp64"
          fi
       #make OS=lmbench  CC=${ARM_OPT}
                 rm -rf bin/lmbench/*.a

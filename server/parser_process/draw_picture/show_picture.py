@@ -15,6 +15,7 @@ import stat
 import logging
 
 import parser_yaml_result as deal_result
+import generate_html as html
 
 LOCATION = os.path.dirname(sys.modules[__name__].__file__)
 CALIPER_DIR= os.path.abspath(os.path.join(LOCATION, '..', '..', '..'))
@@ -43,15 +44,7 @@ def show_caliper_result():
         return_code = deal_result.draw_picture(file_lists, picture_location)
     except Exception, e:
         logging.info(e.args[0], e.args[1])
-   
-    #if not os.path.exists()
-    #shutil.copyfile(LOCATION + "/show_output/get_hardware_info", "./get_hardware_info" )
-    #shutil.copyfile(LOCATION + "/show_output/html_md", "./html_md")
-    #os.chmod("html_md", stat.S_IRWXU + stat.S_IRWXG + stat.S_IRWXO )
-    #os.chmod("get_hardware_info", stat.S_IRWXU + stat.S_IRWXG + stat.S_IRWXO )
-    #os.system("./html_md")
-    #os.remove("./get_hardware_info")
-    #os.remove("./html_md")
-    #os.remove(OUT_FILE)
+     
+    html.generate_html()
 
 

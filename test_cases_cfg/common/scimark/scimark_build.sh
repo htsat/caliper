@@ -16,7 +16,7 @@ build_scimark() {
         make CC=$GCC clean
     fi
     if [ $ARCH = "arm_64" ]; then
-        make CC=$GCC CFLAGS="-mabi=lp64"
+        make CC=$GCC #CFLAGS="-mabi=lp64"
         cp scimark2 ../../$myOBJPATH
         make CC=$GCC clean
     fi

@@ -1,7 +1,8 @@
 #!/bin/bash
-HTML="output/html/"
+HTML=""
 
 rm -fr ${HTML}head   ${HTML}days   ${HTML}configuration  ${HTML}Caliper_result.md
+rm -fr ${HTML}Caliper_result.md
 
 echo "#Caliper Results#"  >> ${HTML}head
 echo "  " >> ${HTML}head
@@ -10,10 +11,13 @@ echo "Wu Yanjun (00291783) wu.wu@hisilicon.com  "  $(date +%F) >> ${HTML}days
 echo "   "   >> ${HTML}days
 
 
-echo "##"$(uname -n) "Configuration##"  >> ${HTML}configuration
-echo "   " >> ${HTML}configuration
-eval "./get_hardware_info    >> ${HTML}configuration"
-echo "    " >> ${HTML}configuration
+echo "## Configuration ##"  >> ${HTML}configuration
+#echo "   " >> ${HTML}configuration
+#eval "./get_hardware_info    >> ${HTML}configuration"
+#echo "    " >> ${HTML}configuration
+echo "  " >> ${HTML}configuration
+eval "cat ${HTML}configuration_table >> ${HTML}configuration" 
+echo "  " >> ${HTML}configuration
 
 eval "cat ${HTML}head ${HTML}days ${HTML}configuration ${HTML}Caliper_result  >> ${HTML}Caliper_result.md"
 

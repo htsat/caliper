@@ -19,7 +19,7 @@ build_nbench()
         make CC=$GCC clean
     fi
     if [ $ARCH = "arm_64" ]; then
-        make CC=$GCC CFLAGS="-mabi=lp64"
+        make CC=$GCC #CFLAGS="-mabi=lp64"
         cp * ../../$myOBJPATH/nbench
         make CC=$GCC clean
     fi

@@ -31,7 +31,7 @@ def traverse_caliper_output(hosts):
     else:
         if return_code != 1:
             logging.info("there is wrong when dealing the yaml file")
-
+    
 def parser_caliper(host):
     try:
         traverse_caliper_output(host)
