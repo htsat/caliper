@@ -8,7 +8,7 @@ import re
 
 def geometric_mean(values):
     try:
-        values = [ float(value) for value in values if value != 0 ]
+        values = [ float(value) for value in values if (value != 0 and calue != None) ]
     except ValueError:
         return None
 
